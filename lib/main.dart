@@ -1,4 +1,4 @@
-import 'package:calculator_pratice_class_1/pages/calculator_page.dart';
+import 'package:calculator/pages/calculator_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

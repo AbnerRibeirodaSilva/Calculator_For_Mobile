@@ -1,3 +1,4 @@
+import 'package:calculator/controllers/calculator_controller.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorPage extends StatefulWidget {
@@ -6,7 +7,7 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  String number;
+  final _controller = CalculatorController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +16,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildDisplay(text: number),
+          _buildDisplay(text: _controller.result),
           Divider(
             color: Colors.white,
           ),
@@ -46,7 +47,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
           textAlign: TextAlign.end,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 40,
+            fontSize: 55,
+            fontFamily: 'Calculator',
           ),
         ),
       ),
@@ -145,12 +147,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
           ),
         ),
         color: Colors.black,
-        onPressed: () {
-          setState(() {
-            number = '${number ?? ''}$label';
-          });
-        },
+        onPressed: () => _calculatorLogic(label),
       ),
     );
+  }
+
+  _calculatorLogic(String label) {
+    setState(() {
+      _controller.applyCommand(label);
+    });
   }
 }
