@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_spinkit: "^4.1.2"
   splashscreen: ^1.2.0
 
   # The following adds the Cupertino Icons font to your application.
@@ -50,6 +51,7 @@ flutter_icons:
 flutter:
   assets:
     - assets/images/web_hi_res_512.png
+    
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -29,7 +29,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget _buildAppBar() {
     return AppBar(
       title: Text(
-        'Calculadora',
+        'Calculator',
         style: TextStyle(color: Colors.white),
       ),
       centerTitle: true,
@@ -75,7 +75,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         children: [
           _buildButton(label: '0', flex: 2),
           _buildButton(label: ','),
-          _buildButton(label: '=', color: Colors.deepOrange),
+          _buildButton(label: '=', color: Colors.yellow),
         ],
       ),
     );
@@ -88,7 +88,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           _buildButton(label: '1'),
           _buildButton(label: '2'),
           _buildButton(label: '3'),
-          _buildButton(label: '/', color: Colors.deepOrange),
+          _buildButton(label: '/', color: Colors.yellow),
         ],
       ),
     );
@@ -101,7 +101,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           _buildButton(label: '4'),
           _buildButton(label: '5'),
           _buildButton(label: '6'),
-          _buildButton(label: 'x', color: Colors.deepOrange),
+          _buildButton(label: 'x', color: Colors.yellow),
         ],
       ),
     );
@@ -114,7 +114,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           _buildButton(label: '7'),
           _buildButton(label: '8'),
           _buildButton(label: '9'),
-          _buildButton(label: '-', color: Colors.deepOrange),
+          _buildButton(label: '-', color: Colors.yellow),
         ],
       ),
     );
@@ -125,10 +125,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildButton(label: 'AC', color: Colors.deepOrange),
-          _buildButton(label: 'DEL', color: Colors.deepOrange),
-          _buildButton(label: '%', color: Colors.deepOrange),
-          _buildButton(label: '+', color: Colors.deepOrange),
+          _buildButton(label: 'AC', color: Colors.yellow),
+          _buildButton(label: 'DEL', color: Colors.yellow),
+          _buildButton(label: '%', color: Colors.yellow),
+          _buildButton(label: '+', color: Colors.yellow),
         ],
       ),
     );
