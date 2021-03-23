@@ -5,27 +5,28 @@ import 'package:splashscreen/splashscreen.dart';
 void main() {
   runApp(new MaterialApp(
     home: new MyApp(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
-        seconds: 4,
-        navigateAfterSeconds: new CalculatorPage(),
-        title: new Text(
+    return SplashScreen(
+        seconds: 3,
+        navigateAfterSeconds: CalculatorPage(),
+        title: Text(
           'Calculator \nBy Abner Ribeiro',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
         ),
-        image: new Image.asset('assets/images/web_hi_res_512.png'),
+        image: Image.asset('assets/images/web_hi_res_512.png'),
         backgroundColor: Colors.yellow,
-        styleTextUnderTheLoader: new TextStyle(),
+        styleTextUnderTheLoader: TextStyle(),
         photoSize: 80.0,
         loaderColor: Colors.black);
   }

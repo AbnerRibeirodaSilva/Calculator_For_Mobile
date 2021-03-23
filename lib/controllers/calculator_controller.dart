@@ -12,6 +12,7 @@ class CalculatorController {
   String _operation;
   bool _usedOperation;
   String result;
+  bool _usedEqual;
 
   CalculatorController() {
     _clear();
@@ -32,6 +33,9 @@ class CalculatorController {
     } else {
       result = kZero;
     }
+    _memories[_currentMemoryIndex] = double.parse(
+      result.replaceAll(kPoint, '.'),
+    );
   }
 
   void _addDigit(String digit) {
@@ -52,11 +56,16 @@ class CalculatorController {
 
     if (_currentMemoryIndex == kMemoryFirst) {
       _currentMemoryIndex++;
-    } else {
+    } else if (!_usedEqual || (_usedEqual && operation == '=')) {
       _memories[kMemoryFirst] = _calculate();
     }
 
-    if (operation != '=') _operation = operation;
+    if (operation != '=') {
+      _operation = operation;
+      _usedEqual = false;
+    } else {
+      _usedEqual = true;
+    }
 
     _outputFormat();
     _usedOperation = true;
@@ -74,6 +83,7 @@ class CalculatorController {
     if (_operation == 'x') return _memories[0] * _memories[1];
     if (_operation == '/') return _memories[0] / _memories[1];
     if (_operation == '%') return _memories[0] % _memories[1];
+    if (_operation == '=') {}
     return 0.0;
   }
 

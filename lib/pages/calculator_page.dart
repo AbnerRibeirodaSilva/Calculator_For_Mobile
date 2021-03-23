@@ -1,5 +1,6 @@
 import 'package:calculator/controllers/calculator_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class CalculatorPage extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class CalculatorPage extends StatefulWidget {
 
 class _CalculatorPageState extends State<CalculatorPage> {
   final _controller = CalculatorController();
+  String _showingOperation = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +18,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          _buildDisplayShowOperation(text: _showingOperation),
           _buildDisplay(text: _controller.result),
           Divider(
             color: Colors.white,
@@ -34,7 +37,21 @@ class _CalculatorPageState extends State<CalculatorPage> {
       ),
       centerTitle: true,
       backgroundColor: Colors.black,
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.share,
+            color: Colors.yellow,
+          ),
+          onPressed: () => share(),
+        )
+      ],
     );
+  }
+
+  void share() {
+    Share.share(
+        'check out this and other projects done by me in: https://github.com/AbnerRibeirodaSilva');
   }
 
   Widget _buildDisplay({String text}) {
@@ -48,6 +65,24 @@ class _CalculatorPageState extends State<CalculatorPage> {
           style: TextStyle(
             color: Colors.white,
             fontSize: 55,
+            fontFamily: 'Calculator',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDisplayShowOperation({String text}) {
+    return Expanded(
+      child: Container(
+        alignment: Alignment.bottomRight,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        child: Text(
+          text ?? '0',
+          textAlign: TextAlign.end,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
             fontFamily: 'Calculator',
           ),
         ),
@@ -139,22 +174,41 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return Expanded(
       flex: flex,
       child: RaisedButton(
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 20,
-            color: color,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 20,
+              color: color,
+            ),
           ),
-        ),
-        color: Colors.black,
-        onPressed: () => _calculatorLogic(label),
-      ),
+          color: Colors.black,
+          onPressed: () {
+            setState(() {
+              _calculatorLogic(label);
+              _showOperation(label);
+            });
+          }),
     );
   }
 
+  _showOperation(String label) {
+    final length = _showingOperation.length;
+    if (label == 'AC') {
+      _showingOperation = '';
+    } else if (label == 'DEL') {
+      if (length > 1) {
+        _showingOperation = _showingOperation.substring(0, length - 1);
+      } else {
+        _showingOperation = '';
+      }
+    } else if (label == '=') {
+      _showingOperation += label + _controller.result;
+    } else {
+      _showingOperation += label;
+    }
+  }
+
   _calculatorLogic(String label) {
-    setState(() {
-      _controller.applyCommand(label);
-    });
+    _controller.applyCommand(label);
   }
 }
